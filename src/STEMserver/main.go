@@ -22,9 +22,9 @@ func main() {
 
 		//Директория с файлом
 		//Для продакшн сервера
-		//path := os.Getenv("HOME") + "/STEMserver"
+		path "~/home/kek/MKS_AR_server/src/STEMserver/schedule.xml"
 		//Для теста
-		path := "C:/gopath/src/STEMserver/schedule.xml"
+		//path := "C:/gopath/src/STEMserver/schedule.xml"
 
 		reqFile, err := os.Open(path)
 		if err != nil {
