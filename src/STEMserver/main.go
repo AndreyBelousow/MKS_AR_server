@@ -22,7 +22,7 @@ func main() {
 
 		//Директория с файлом
 		//Для продакшн сервера
-		path := "~/home/kek/MKS_AR_server/src/STEMserver/schedule.xml"
+		path := "schedule.xml"
 		//Для теста
 		//path := "C:/gopath/src/STEMserver/schedule.xml"
 
