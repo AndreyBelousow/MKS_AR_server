@@ -1,0 +1,46 @@
+m.Get("/", func(res http.ResponseWriter, r *http.Request) {
+
+	//Флаг годности файла
+	badfile := false
+
+	//Имя файла
+	file := r.URL.Path
+
+	//Директория с файлами
+	//Для продакшн сервера
+	//base := os.Getenv("HOME") + "/STEMserver/files"
+	//Для теста
+	base := "C:/gopath/src/STEMserver/files"
+
+	//Дефолтный файл при отсутствии конкретного запроса
+	if file == "/" {
+		file = "/index.html"
+		badfile = true
+		fmt.Println("calling index.html\n_______________")
+	}
+
+	reqFile, err := os.Open(base + file)
+	//404 при отсутствии нужного файла
+	if err != nil {
+		file = "/404.html"
+		reqFile, err = os.Open(base + file)
+		badfile = true
+		fmt.Println("calling 404.html\n_______________")
+	}
+
+	//Считываем файл
+	fi, err := reqFile.Stat()
+	//Эта штука определяет тип файла
+	//contentType := mime.TypeByExtension(path.Ext(file))
+	size := fi.Size()
+	var bytes = make([]byte, size)
+	reqFile.Read(bytes)
+
+	//Отправляем
+	if badfile {
+		res.WriteHeader(1488)
+	} else {
+		res.WriteHeader(200)
+	}
+	res.Write(bytes)
+})
